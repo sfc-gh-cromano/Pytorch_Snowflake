@@ -1,0 +1,23 @@
+# @package _global_
+
+defaults:
+  - override /hydra/sweeper: optuna
+
+optimized_metric: "validation_mIoU"
+
+hydra:
+  mode: "MULTIRUN"
+
+  sweeper:
+    _target_: hydra_plugins.hydra_optuna_sweeper.optuna_sweeper.OptunaSweeper
+    n_jobs: 1
+    direction: maximize   # Available options: ['minimize', 'maximize']
+    n_trials: 2
+    study_name: "lr_adjustments"
+    sampler:  # https://optuna.readthedocs.io/en/stable/reference/samplers.html
+      _target_: optuna.samplers.TPESampler
+      seed: ${seed}
+      n_startup_trials: 1
+
+    params:   # Search space https://hydra.cc/docs/advanced/override_grammar/extended/
+      model_module.optimizer.lr: interval(0.00001, 0.01)

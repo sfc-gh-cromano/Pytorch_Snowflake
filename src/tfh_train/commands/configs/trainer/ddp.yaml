@@ -1,0 +1,9 @@
+defaults:
+  - default.yaml
+
+strategy: ddp
+
+accelerator: gpu
+devices: -1   # Use all available GPUs on the machine.
+num_nodes: 1
+sync_batchnorm: true

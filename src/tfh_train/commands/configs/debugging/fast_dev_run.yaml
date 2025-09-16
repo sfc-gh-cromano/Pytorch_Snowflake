@@ -1,0 +1,11 @@
+# @package _global_
+# Runs 1 train, 1 validation and 1 test step
+# https://lightning.ai/docs/pytorch/latest/debug/debugging_basic.html#run-all-your-model-code-once-quickly
+
+defaults:
+  - default.yaml
+
+command_name: "tfh_train_fdr"
+
+trainer:
+  fast_dev_run: true

@@ -1,0 +1,119 @@
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tfh_train"
+description = "tfh_train: A training framework for deep learning models."
+readme = "README.md"
+requires-python = ">=3.8.0"
+dynamic = ["version"]
+dependencies = [
+    "albumentations",
+    "beartype",
+    "hydra-core",
+    "hydra-optuna-sweeper",
+    "jaxtyping",
+    "kornia",
+    "lightning",
+    "loguru",
+    "mlflow",
+    "numpy",
+    "opencv-python",
+    "pandas",
+    "tensorboard",
+    "timm",
+    "torch",
+    "torchvision",
+]
+
+[project.scripts]
+tfh-train = "tfh_train.commands.train:train"
+tfh-evaluate = "tfh_train.commands.evaluate:evaluate"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["tfh_train*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.yml"]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "coverage",
+    "isort",
+    "jupyterlab",
+    "mypy",
+    "nb-clean",
+    "pre-commit",
+    "pydocstyle[toml]",
+    "pytest",
+    "ruff",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "tfh_train._version.__version__"}
+
+[tool.coverage.report]
+omit = ["src/tfh_train/commands/train.py", "src/tfh_train/commands/evaluate.py", "tests/*", "*__init__.py", "*_version.py"]
+exclude_lines = ["if __name__ == .__main__.:"]
+
+[tool.ruff]
+exclude = ["__init__.py"]
+lint.select = ["E", "F", "PLC", "PLE", "PLR", "PLW"]
+lint.ignore = ["E501", "F722", "F821", "PLR2004", "PLR0915", "PLR0913", "PLC0414", "PLC1901", "PLR0402", "PLR5501", "PLR0911", "PLR0912", "PLW0603", "PLW2901"]
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 120
+src_paths = ["*"]
+
+[tool.mypy]
+python_version = "3.8"
+files = ["src/tfh_train", "scripts", "tests"]
+follow_imports = "skip"
+ignore_missing_imports = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+allow_redefinition = true
+disallow_incomplete_defs = true
+
+[tool.pydocstyle]
+inherit = false
+ignore = ["D100", "D104", "D203", "D205", "D211", "D213", "D406", "D407", "D413"]
+match = ".*.py"
+
+[tool.pytest]
+minversion = 6.0
+testpaths = ["tests"]
+xfail_strict = true
+log_auto_indent = true
+
+[tool.pytest.ini_options]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.black]
+line-length = 120
+
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''

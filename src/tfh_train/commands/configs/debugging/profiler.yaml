@@ -1,0 +1,12 @@
+# @package _global_
+# Execution time profiling
+# https://pytorch-lightning.readthedocs.io/en/1.6.3/advanced/profiler.html#supported-profilers
+
+defaults:
+  - default.yaml
+
+command_name: "tfh_train_profiler"
+
+trainer:
+  max_epochs: 1
+  profiler: "simple"  # Available options: ["simple", "advanced", "pytorch"]

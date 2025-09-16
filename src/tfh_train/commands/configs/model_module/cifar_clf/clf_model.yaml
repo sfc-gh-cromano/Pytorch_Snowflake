@@ -1,0 +1,13 @@
+_target_: tfh_train.model_zoo.cifar_clf.model_module.CifarClassifierTraining
+
+model:
+  _target_: tfh_train.model_zoo.cifar_clf.model.CifarClassifier
+
+criterion:
+  _target_: torch.nn.CrossEntropyLoss
+
+optimizer:
+  _target_: torch.optim.SGD
+  _partial_: true
+  lr: 0.001
+  momentum: 0.9

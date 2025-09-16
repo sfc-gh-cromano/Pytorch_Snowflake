@@ -1,0 +1,11 @@
+# @package _global_
+# Overfits to 2 (by default) batches
+# https://lightning.ai/docs/pytorch/latest/debug/debugging_intermediate.html#overfit-your-model-on-a-subset-of-data
+
+command_name: "tfh_train_overfit_batches"
+
+callbacks: null
+
+trainer:
+  max_epochs: 20
+  overfit_batches: 2

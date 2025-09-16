@@ -1,0 +1,14 @@
+# @package _global_
+
+callbacks: null
+loggers: null
+
+trainer:
+  max_epochs: 1
+  accelerator: cpu
+  devices: 1
+  detect_anomaly: true
+
+data_module:
+  num_workers: 0
+  pin_memory: False

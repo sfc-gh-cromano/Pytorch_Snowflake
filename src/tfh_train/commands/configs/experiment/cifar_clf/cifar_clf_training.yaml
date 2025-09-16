@@ -1,0 +1,29 @@
+# @package _global_
+
+defaults:
+  - override /data_module: cifar_clf/clf_dataset.yaml
+  - override /model_module: cifar_clf/clf_model.yaml
+  - override /trainer: cpu.yaml
+  - override /loggers: tensorboard.yaml
+
+seed: 12345
+
+callbacks:
+  model_checkpoint:
+    dirpath: ${paths.output_dir}/checkpoints
+    filename: "epoch_{epoch}_{validation_loss:.7f}"
+    monitor: "validation_loss"
+    mode: "min"
+    save_last: True
+    save_top_k: 5
+
+  early_stopping:
+    patience: 4
+    monitor: "validation_loss"
+    mode: "min"
+
+trainer:
+  max_epochs: 10
+
+data_module:
+  batch_size: 4

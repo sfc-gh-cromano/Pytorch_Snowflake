@@ -1,0 +1,21 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - data_module: null
+  - model_module: null
+  - trainer: cpu.yaml
+  - paths: default.yaml
+  - callbacks: default.yaml
+  - loggers: default.yaml
+  - hydra: default.yaml
+
+  - experiment: null
+  - hparams_search: null
+  - debugging: null
+
+tags: ["train"]
+command_name: "tfh_train_train"
+
+ckpt_path: null
+seed: null

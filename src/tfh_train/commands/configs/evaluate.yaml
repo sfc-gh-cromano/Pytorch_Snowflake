@@ -1,0 +1,19 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - data_module: null
+  - model_module: null
+  - trainer: cpu.yaml
+  - paths: default.yaml
+  - callbacks: default.yaml
+  - loggers: csv.yaml
+  - hydra: default.yaml
+
+  - experiment: null
+  - debugging: null
+
+tags: ["evaluate"]
+command_name: "tfh_train_evaluate"
+
+ckpt_path: null

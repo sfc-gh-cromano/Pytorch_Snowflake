@@ -1,0 +1,5 @@
+mlflow:
+  _target_: lightning.pytorch.loggers.mlflow.MLFlowLogger
+  experiment_name: "experiment"
+  run_name: "experiment-${now:%Y-%m-%d}_${now:%H-%M-%S}"
+  tracking_uri: URL

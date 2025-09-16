@@ -1,0 +1,5 @@
+_target_: tfh_train.model_zoo.cifar_clf.data_module.CifarClassifierLightningDataModule
+
+batch_size: 4
+num_workers: 2
+pin_memory: true
