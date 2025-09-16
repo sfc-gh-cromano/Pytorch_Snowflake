@@ -3,7 +3,6 @@
 .vscode
 .ruff_cache/
 /data
-/notebooks
 /logs/
 
 # Byte-compiled / optimized / DLL files
