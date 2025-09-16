@@ -34,6 +34,17 @@ class CifarClassifierTraining(BaseLightningModelModule):
             test_metric=torchmetrics.Accuracy(task="multiclass", num_classes=10),
         )
 
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Forward pass through the model.
+
+        Args:
+            x (torch.Tensor): Input tensor.
+
+        Returns:
+            torch.Tensor: Model output.
+        """
+        return self.neural_net(x)
+
     def configure_optimizers(self) -> Tuple[List[torch.optim.Optimizer], List[torch.optim.lr_scheduler.LRScheduler]]:
         """Configure optimizer.
 
@@ -61,13 +72,13 @@ class CifarClassifierTraining(BaseLightningModelModule):
         Returns:
             L.pytorch.utilities.types.STEP_OUTPUT: Output dictionary.
         """
-        image, true_segmap = batch
+        image, true_labels = batch
 
-        pred_segmap = self.neural_net(image)
+        pred_logits = self.neural_net(image)
 
-        loss = self.criterion(pred_segmap, true_segmap)
+        loss = self.criterion(pred_logits, true_labels)
 
-        stage_metric(pred_segmap, true_segmap)
+        stage_metric(pred_logits, true_labels)
 
         return {"loss": loss}
 
